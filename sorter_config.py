@@ -7,10 +7,26 @@ import shutil
 
 # 1. SET YOUR FOLDER PATHS
 SOURCE_FOLDER = "D:\\mladi\\Documents\\FL relief"
+#SOURCE_FOLDER = "C:\\Users\\mladi\\Documents\\Splice"
+
+
 TARGET_FOLDER = "D:\\mladi\\Documents\\FL relief sorted"
 
 # 2. SET THE MAXIMUM SEARCH DEPTH (None for unlimited)
 MAX_DEPTH = None
+
+# 3. SET PATHS TO IGNORE
+#    Add any folder names or relative paths you want the script to skip.
+#    The paths should be relative to your SOURCE_FOLDER.
+#    Example: ["Previews", "Project Files/Old Versions"]
+IGNORED_PATHS = [
+    "__MACOSX",  # Often contains metadata files you don't need
+    ".DS_Store", # macOS system files
+    "Sounds of KSHMR",
+    "A kapele",
+    "FLP remakeovi",
+    "MIHO Graphics"
+]
 
 # 3. DEFINE YOUR SORTING RULES
 #    - 'priority': An integer. Higher numbers have higher priority.
@@ -41,27 +57,102 @@ SORTING_RULES = [
     },
 
     # -- DRUMS --
+
     {
         'priority': 100,
-        'destination': 'Samples/Drums/Kicks',
+        'destination': 'Samples/Drums/Kicks/Big Kicks',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['kick', 'big']
+    },
+    {
+        'priority': 100,
+        'destination': 'Samples/Drums/Kicks/Punchy Kicks',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['kick', 'punchy']
+    },
+    {
+        'priority': 100,
+        'destination': 'Samples/Drums/Kicks/Stomp Kicks',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['kick', 'stomp']
+    },
+    {
+        'priority': 100,
+        'destination': 'Samples/Drums/Kicks/Top Kicks',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['kick', 'top']
+    },
+    {
+        'priority': 90,
+        'destination': 'Samples/Drums/Kicks/Other',
         'extensions': ['.wav', '.mp3', '.aif'],
         'keywords': ['kick']
     },
     {
-        'priority': 99,
+        'priority': 89,
         'destination': 'Samples/Drums/Kicks',
         'extensions': ['.wav', '.mp3'],
         'keywords': ['bd']
     },
     {
         'priority': 100,
-        'destination': 'Samples/Drums/Snares',
+        'destination': 'Samples/Drums/808s',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['808']
+    },
+
+    {
+        'priority': 100,
+        'destination': 'Samples/Drums/Snares/Big Snares',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['snare', 'big']
+    },
+    {
+        'priority': 100,
+        'destination': 'Samples/Drums/Snares/Hard Snares',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['snare', 'hard']
+    },
+    {
+        'priority': 100,
+        'destination': 'Samples/Drums/Snares/Tight Snares',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['snare', 'tight']
+    },
+    {
+        'priority': 90,
+        'destination': 'Samples/Drums/Snares/Other',
         'extensions': ['.wav', '.mp3', '.aif'],
         'keywords': ['snare']
     },
+
     {
         'priority': 101,
-        'destination': 'Samples/Drums/Claps',
+        'destination': 'Samples/Drums/Claps/Drop Claps',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['clap', 'drop']
+    },
+    {
+        'priority': 101,
+        'destination': 'Samples/Drums/Claps/Pre-shifted Claps',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['clap', 'shifted']
+    },
+    {
+        'priority': 101,
+        'destination': 'Samples/Drums/Claps/Regular Claps',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['clap', 'regular']
+    },
+    {
+        'priority': 101,
+        'destination': 'Samples/Drums/Claps/Stadium Claps',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['clap', 'stadium']
+    },
+    {
+        'priority': 91,
+        'destination': 'Samples/Drums/Claps/Other',
         'extensions': ['.wav', '.mp3', '.aif'],
         'keywords': ['clap']
     },
@@ -92,7 +183,7 @@ SORTING_RULES = [
     },
     {
         'priority': 50,
-        'destination': 'Samples/Drums/Cymbals/Hats',
+        'destination': 'Samples/Drums/Cymbals/Hats/Other',
         'extensions': ['.wav', '.mp3', '.aif'],
         'keywords': ['hat']
     },
@@ -164,22 +255,27 @@ SORTING_RULES = [
         'extensions': ['.wav', '.mp3', '.aif'],
         'keywords': ['perc', 'roll']
     },
-
     {
         'priority': 100,
         'destination': 'Samples/Drums/Percussion/Shakers',
         'extensions': ['.wav', '.mp3', '.aif'],
         'keywords': ['shaker']
     },
+    {
+        'priority': 80,
+        'destination': 'Samples/Drums/Percussion/Foley',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['foley']
+    },
 
     {
-        'priority': 50,
-        'destination': 'Samples/Drums/Percussion/Unsorted',
+        'priority': 20,
+        'destination': 'Samples/Drums/Percussion/Other',
         'extensions': ['.wav', '.mp3', '.aif'],
         'keywords': ['percussion']
     },
     {
-        'priority': 50,
+        'priority': 10,
         'destination': 'Samples/Drums/Percussion/Unsorted',
         'extensions': ['.wav', '.mp3', '.aif'],
         'keywords': ['perc']
@@ -192,6 +288,18 @@ SORTING_RULES = [
         'destination': 'Samples/Drums/Loops/Top Loops',
         'extensions': ['.wav', '.mp3', '.aif'],
         'keywords': ['loop', 'top']
+    },
+    {
+        'priority': 100,
+        'destination': 'Samples/Drums/Loops/Percussion Loops',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['loop', 'percussion']
+    },
+    {
+        'priority': 100,
+        'destination': 'Samples/Drums/Loops/Buildup Drums',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['loop', 'percussion']
     },
     {
         'priority': 100,
@@ -267,6 +375,12 @@ SORTING_RULES = [
         'extensions': ['.wav', '.mp3', '.aif'],
         'keywords': ['fill', 'dubstep']
     },
+    {
+        'priority': 10,
+        'destination': 'Samples/Fills/Dubstep Fills',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['fill']
+    },
 
     # -- LOOPS --
 
@@ -275,6 +389,12 @@ SORTING_RULES = [
         'destination': 'Samples/Loops/',
         'extensions': ['.wav', '.mp3', '.aif'],
         'keywords': ['loop']
+    },
+    {
+        'priority': 11,
+        'destination': 'Samples/Loops/Melodies',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['melody']
     },
 
 
@@ -300,6 +420,18 @@ SORTING_RULES = [
         'keywords': ['ambiance', 'airy']
     },
     {
+        'priority': 50,
+        'destination': 'Samples/FX/Ambiance/Drone',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['drone']
+    },
+    {
+        'priority': 30,
+        'destination': 'Samples/FX/Ambiance/Reverbed',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['reverb']
+    },
+    {
         'priority': 90,
         'destination': 'Samples/FX/Ambiance/Bird calls',
         'extensions': ['.wav', '.mp3', '.aif'],
@@ -315,19 +447,19 @@ SORTING_RULES = [
         'priority': 90,
         'destination': 'Samples/FX/Ambiance/Hard Strikes',
         'extensions': ['.wav', '.mp3', '.aif'],
-        'keywords': ['ambiance', 'Hard Strikes']
+        'keywords': ['ambiance', 'hard strikes']
     },
     {
         'priority': 90,
         'destination': 'Samples/FX/Ambiance/Pretty',
         'extensions': ['.wav', '.mp3', '.aif'],
-        'keywords': ['ambiance', 'Pretty']
+        'keywords': ['ambiance', 'pretty']
     },
     {
-        'priority': 90,
+        'priority': 40,
         'destination': 'Samples/FX/Ambiance/Rain',
         'extensions': ['.wav', '.mp3', '.aif'],
-        'keywords': ['ambiance', 'rain']
+        'keywords': ['rain']
     },
     {
         'priority': 85,
@@ -340,6 +472,18 @@ SORTING_RULES = [
         'destination': 'Samples/FX/Ambiance/Nature',
         'extensions': ['.wav', '.mp3', '.aif'],
         'keywords': ['ambiance', 'natural']
+    },
+    {
+        'priority': 40,
+        'destination': 'Samples/FX/Ambiance/Other',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['ambiance']
+    },
+    {
+        'priority': 40,
+        'destination': 'Samples/FX/Ambiance/Other',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['ambience']
     },
     {
         'priority': 80,
@@ -363,13 +507,13 @@ SORTING_RULES = [
         'priority': 80,
         'destination': 'Samples/FX/Ambiance/Hard Strikes',
         'extensions': ['.wav', '.mp3', '.aif'],
-        'keywords': ['amb', 'Hard Strikes']
+        'keywords': ['amb', 'hard strikes']
     },
     {
         'priority': 80,
         'destination': 'Samples/FX/Ambiance/Pretty',
         'extensions': ['.wav', '.mp3', '.aif'],
-        'keywords': ['amb', 'Pretty']
+        'keywords': ['amb', 'pretty']
     },
     {
         'priority': 80,
@@ -388,6 +532,12 @@ SORTING_RULES = [
         'destination': 'Samples/FX/Ambiance/Nature',
         'extensions': ['.wav', '.mp3', '.aif'],
         'keywords': ['amb', 'natural']
+    },
+    {
+        'priority': 10,
+        'destination': 'Samples/FX/Ambiance/Other',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['amb']
     },
 
     {
@@ -427,6 +577,12 @@ SORTING_RULES = [
         'keywords': ['impact']
     },
     {
+        'priority': 20,
+        'destination': 'Samples/FX/Impacts',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['hit']
+    },
+    {
         'priority': 50,
         'destination': 'Samples/FX/Reverb Plucks',
         'extensions': ['.wav', '.mp3', '.aif'],
@@ -445,10 +601,10 @@ SORTING_RULES = [
         'keywords': ['stab']
     },
     {
-        'priority': 50,
+        'priority': 40,
         'destination': 'Samples/FX/Sub Drops',
         'extensions': ['.wav', '.mp3', '.aif'],
-        'keywords': ['Sub Drop']
+        'keywords': ['sub', 'drop']
     },
     # sweeps
     {
@@ -485,25 +641,25 @@ SORTING_RULES = [
         'priority': 50,
         'destination': 'Samples/FX/Sweeps/Down/Long',
         'extensions': ['.wav', '.mp3', '.aif'],
-        'keywords': ['sweep', 'Down', 'long'],
+        'keywords': ['sweep', 'down', 'long'],
     },
     {
         'priority': 50,
         'destination': 'Samples/FX/Sweeps/Down/Short',
         'extensions': ['.wav', '.mp3', '.aif'],
-        'keywords': ['sweep', 'Down', 'short'],
+        'keywords': ['sweep', 'down', 'short'],
     },
     {
         'priority': 50,
         'destination': 'Samples/FX/Sweeps/Down/Medium',
         'extensions': ['.wav', '.mp3', '.aif'],
-        'keywords': ['sweep', 'Down', 'medium'],
+        'keywords': ['sweep', 'down', 'medium'],
     },
     {
         'priority': 49,
         'destination': 'Samples/FX/Sweeps/Down/Other',
         'extensions': ['.wav', '.mp3', '.aif'],
-        'keywords': ['sweep', 'Down'],
+        'keywords': ['sweep', 'down'],
     },
     {
         'priority': 45,
@@ -513,10 +669,86 @@ SORTING_RULES = [
     },
 
     {
+        'priority': 100,
+        'destination': 'Samples/FX/White Noise/Up',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['white', 'noise', 'up']
+    },
+    {
+        'priority': 100,
+        'destination': 'Samples/FX/White Noise/Down',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['white', 'noise', 'down']
+    },
+    {
+        'priority': 100,
+        'destination': 'Samples/FX/White Noise/Down',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['white', 'noise', 'splash']
+    },
+    {
+        'priority': 90,
+        'destination': 'Samples/FX/White Noise/Other',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['white', 'noise']
+    },
+    {
+        'priority': 10,
+        'destination': 'Samples/FX/White Noise/Other',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['noise']
+    },
+
+    {
+        'priority': 100,
+        'destination': 'Samples/FX/Risers/Long',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['riser', 'long']
+    },
+    {
+        'priority': 100,
+        'destination': 'Samples/FX/Risers/Short',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['riser', 'short']
+    },
+    {
+        'priority': 90,
+        'destination': 'Samples/FX/Risers/Other',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['riser']
+    },
+
+        {
+        'priority': 100,
+        'destination': 'Samples/FX/Downlifters/Long',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['downlifter', 'long']
+    },
+    {
+        'priority': 100,
+        'destination': 'Samples/FX/Downlifters/Short',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['downlifter', 'short']
+    },
+    {
+        'priority': 90,
+        'destination': 'Samples/FX/Downlifters/Other',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['downlifter']
+    },
+    {
+        'priority': 80,
+        'destination': 'Samples/FX/Downlifters/Other',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['faller']
+    },
+
+
+    {
         'priority': 50,
         'destination': 'Samples/FX/Tape Stops',
         'extensions': ['.wav', '.mp3', '.aif'],
-        'keywords': ['Tape Stop']
+        'keywords': ['tape stop']
     },
     {
         'priority': 90,
@@ -553,19 +785,19 @@ SORTING_RULES = [
         'priority': 50,
         'destination': 'Samples/FX/War Horns',
         'extensions': ['.wav', '.mp3', '.aif'],
-        'keywords': ['War Horn']
+        'keywords': ['war horn']
     },
     {
         'priority': 50,
         'destination': 'Samples/FX/Water Drops',
         'extensions': ['.wav', '.mp3', '.aif'],
-        'keywords': ['Water Drop']
+        'keywords': ['water drop']
     },
     {
         'priority': 10,
         'destination': 'Samples/FX/Zipties',
         'extensions': ['.wav', '.mp3', '.aif'],
-        'keywords': ['Zip']
+        'keywords': ['zip']
     },
 
     # -- LIVE INSTRUMENTS --
@@ -590,94 +822,144 @@ SORTING_RULES = [
     },
 
     {
-        'priority': 50,
-        'destination': 'Samples/Instruments/Ethnic/Main',
+        'priority': 100,
+        'destination': 'Samples/Instruments/Piano/Loops',
         'extensions': ['.wav', '.mp3', '.aif'],
-        'keywords': ['Bansuri']
+        'keywords': ['piano', 'loop']
+    },
+    {
+        'priority': 90,
+        'destination': 'Samples/Instruments/Piano/One Shots',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['piano', 'one', 'shot']
+    },
+    {
+        'priority': 110,
+        'destination': 'Samples/Instruments/Piano/Chords',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['piano', 'chords']
     },
     {
         'priority': 50,
+        'destination': 'Samples/Instruments/Piano/Other',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['piano']
+    },
+
+    {
+        'priority': 50,
+        'destination': 'Samples/Instruments/Strings/Violin',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['violin']
+    },
+    {
+        'priority': 50,
+        'destination': 'Samples/Instruments/Strings/Other',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['string']
+    },
+    {
+        'priority': 50,
+        'destination': 'Samples/Instruments/Bells',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['bell']
+    },
+    {
+        'priority': 50,
+        'destination': 'Samples/Instruments/Flute',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['flute']
+    },
+
+    {
+        'priority': 50,
         'destination': 'Samples/Instruments/Ethnic/Main',
         'extensions': ['.wav', '.mp3', '.aif'],
-        'keywords': ['Bayan']
+        'keywords': ['bansuri']
     },
     {
         'priority': 50,
         'destination': 'Samples/Instruments/Ethnic/Main',
         'extensions': ['.wav', '.mp3', '.aif'],
-        'keywords': ['Cura']
+        'keywords': ['bayan']
     },
     {
         'priority': 50,
         'destination': 'Samples/Instruments/Ethnic/Main',
         'extensions': ['.wav', '.mp3', '.aif'],
-        'keywords': ['Duduk']
+        'keywords': ['bura']
     },
     {
         'priority': 50,
         'destination': 'Samples/Instruments/Ethnic/Main',
         'extensions': ['.wav', '.mp3', '.aif'],
-        'keywords': ['Harmonium']
-    },
-    {
-        'priority': 10,
-        'destination': 'Samples/Instruments/Ethnic/Main',
-        'extensions': ['.wav', '.mp3', '.aif'],
-        'keywords': ['Indian']
+        'keywords': ['duduk']
     },
     {
         'priority': 50,
         'destination': 'Samples/Instruments/Ethnic/Main',
         'extensions': ['.wav', '.mp3', '.aif'],
-        'keywords': ['Kemenche']
+        'keywords': ['harmonium']
+    },
+    {
+        'priority': 20,
+        'destination': 'Samples/Instruments/Ethnic/Main',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['indian']
+    },
+    {
+        'priority': 50,
+        'destination': 'Samples/Instruments/Ethnic/Main',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['kemenche']
     },
     {
         'priority': 10,
         'destination': 'Samples/Instruments/Ethnic/Main',
         'extensions': ['.wav', '.mp3', '.aif'],
-        'keywords': ['Mey']
+        'keywords': ['mey']
     },
     {
         'priority': 10,
         'destination': 'Samples/Instruments/Ethnic/Main',
         'extensions': ['.wav', '.mp3', '.aif'],
-        'keywords': ['Morsing']
+        'keywords': ['morsing']
     },
     {
         'priority': 10,
         'destination': 'Samples/Instruments/Ethnic/Main',
         'extensions': ['.wav', '.mp3', '.aif'],
-        'keywords': ['Ney']
+        'keywords': ['ney']
     },
     {
         'priority': 10,
         'destination': 'Samples/Instruments/Ethnic/Main',
         'extensions': ['.wav', '.mp3', '.aif'],
-        'keywords': ['Oud']
+        'keywords': ['oud']
     },
     {
         'priority': 10,
         'destination': 'Samples/Instruments/Ethnic/Main',
         'extensions': ['.wav', '.mp3', '.aif'],
-        'keywords': ['Santur']
+        'keywords': ['santur']
     },
     {
         'priority': 10,
         'destination': 'Samples/Instruments/Ethnic/Main',
         'extensions': ['.wav', '.mp3', '.aif'],
-        'keywords': ['Oud']
+        'keywords': ['oud']
     },
     {
         'priority': 10,
         'destination': 'Samples/Instruments/Ethnic/Main',
         'extensions': ['.wav', '.mp3', '.aif'],
-        'keywords': ['Swarmandal']
+        'keywords': ['swarmandal']
     },
     {
         'priority': 10,
         'destination': 'Samples/Instruments/Ethnic/Main',
         'extensions': ['.wav', '.mp3', '.aif'],
-        'keywords': ['Tumbi']
+        'keywords': ['tumbi']
     },
 
     {
@@ -715,6 +997,18 @@ SORTING_RULES = [
         'keywords': ['arp']
     },
     {
+        'priority': 50,
+        'destination': 'Samples/Synths/Chords',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['chords']
+    },
+    {
+        'priority': 20,
+        'destination': 'Samples/Synths/Keys',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['keys']
+    },
+    {
         'priority': 80,
         'destination': 'Samples/Synths/Bass/One Shots',
         'extensions': ['.wav', '.mp3', '.aif'],
@@ -733,6 +1027,13 @@ SORTING_RULES = [
         'keywords': ['bass', 'stab']
     },
     {
+        'priority': 10,
+        'destination': 'Samples/Synths/Bass/Other',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['bass']
+    },
+
+    {
         'priority': 30,
         'destination': 'Samples/Synths/Stabs',
         'extensions': ['.wav', '.mp3', '.aif'],
@@ -746,9 +1047,45 @@ SORTING_RULES = [
     },
     {
         'priority': 80,
-        'destination': 'Samples/Synths/Synth Shots',
+        'destination': 'Samples/Synths/One Shots',
         'extensions': ['.wav', '.mp3', '.aif'],
         'keywords': ['synth', 'shot']
+    },
+    {
+        'priority': 80,
+        'destination': 'Samples/Synths/One Shots',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['tonal', 'one', 'shot']
+    },
+    {
+        'priority': 80,
+        'destination': 'Samples/Synths/Ear Candy',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['ear', 'candy']
+    },
+    {
+        'priority': 80,
+        'destination': 'Samples/Synths/Ear Candy',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['ecfx', 'trill']
+    },
+    {
+        'priority': 20,
+        'destination': 'Samples/Synths/Leads',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['lead']
+    },
+    {
+        'priority': 20,
+        'destination': 'Samples/Synths/Plucks',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['pluck']
+    },
+    {
+        'priority': 10,
+        'destination': 'Samples/Synths/Plucks',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['synth']
     },
     
 
@@ -802,6 +1139,12 @@ SORTING_RULES = [
         'extensions': ['.wav', '.mp3'],
         'keywords': ['vocal', 'shout']
     },
+    {
+        'priority': 50,
+        'destination': 'Samples/Vocals/Vocal Chants',
+        'extensions': ['.wav', '.mp3'],
+        'keywords': ['chant']
+    },
 
     {
         'priority': 100,
@@ -834,10 +1177,33 @@ SORTING_RULES = [
         'keywords': ['vocal', 'adlib']
     },
     {
+        'priority': 40,
+        'destination': 'Samples/Vocals/Vocal Performance',
+        'extensions': ['.wav', '.mp3'],
+        'keywords': ['adlib']
+    },
+    {
         'priority': 50,
         'destination': 'Samples/Vocals/Vocal Performance',
         'extensions': ['.wav', '.mp3'],
-        'keywords': ['vox', 'adlib']
+        'keywords': ['acapella']
+    },
+
+
+    {
+        'priority': 10,
+        'destination': 'Samples/Vocals/Other',
+        'extensions': ['.wav', '.mp3'],
+        'keywords': ['vocal']
+    },
+
+
+    # -- MIDI --
+    {
+        'priority': 100,
+        'destination': 'MIDI/',
+        'extensions': ['.mid'],
+        'keywords': ['']
     },
 
 ]

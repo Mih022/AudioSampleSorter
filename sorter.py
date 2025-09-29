@@ -1,6 +1,6 @@
 import os
 import shutil
-from sorter_config import SOURCE_FOLDER, TARGET_FOLDER, MAX_DEPTH, SORTING_RULES
+from sorter_config import SOURCE_FOLDER, TARGET_FOLDER, IGNORED_PATHS, MAX_DEPTH, SORTING_RULES
 
 def copy_if_not_exists(source_path, dest_folder, filename):
     """
@@ -20,13 +20,12 @@ def sort_files():
     """
     Main function to orchestrate the file sorting process with priority logic.
     """
-    print("🚀 Starting the sorting process with priority rules...")
+    print("🚀 Starting the sorting process...")
 
     if not os.path.isdir(SOURCE_FOLDER):
         print(f"❌ ERROR: Source folder not found at '{SOURCE_FOLDER}'")
         return
 
-    # --- NEW: Initialize statistics dictionary ---
     stats = {
         'total': 0,
         'copied': 0,
@@ -37,20 +36,28 @@ def sort_files():
 
     conflict_path = os.path.join(TARGET_FOLDER, "Conflict")
     unsorted_path = os.path.join(TARGET_FOLDER, "Unsorted")
-
     os.makedirs(conflict_path, exist_ok=True)
     os.makedirs(unsorted_path, exist_ok=True)
+
+    #Create a set of full, normalized paths to ignore
+    full_ignored_paths = {os.path.normpath(os.path.join(SOURCE_FOLDER, p)) for p in IGNORED_PATHS}
 
     source_folder_depth = SOURCE_FOLDER.rstrip(os.sep).count(os.sep)
 
     for root, dirs, files in os.walk(SOURCE_FOLDER):
+        #Pruning logic to skip ignored folders ---
+        normalized_root = os.path.normpath(root)
+        if normalized_root in full_ignored_paths:
+            print(f"⏭️  Skipping ignored directory: {os.path.relpath(root, SOURCE_FOLDER)}")
+            dirs[:] = [] # Don't traverse any deeper into this directory
+            continue # Skip processing files in this directory
+
         if MAX_DEPTH is not None:
             current_depth = root.count(os.sep) - source_folder_depth
             if current_depth >= MAX_DEPTH:
                 del dirs[:]
 
         for filename in files:
-            # --- NEW: Increment total file count ---
             stats['total'] += 1
             
             source_file_path = os.path.join(root, filename)
@@ -106,17 +113,16 @@ def sort_files():
     print("\n🎉 Sorting complete!")
     print(f"Your original files in '{SOURCE_FOLDER}' are untouched.")
     
-    # --- NEW: Print final statistics ---
     print("\n" + "="*20 + " 📊 Sorting Summary " + "="*20)
     if stats['total'] == 0:
-        print("No files were found to process.")
+        print("No files were found to process (or all were in ignored paths).")
     else:
         # Calculate percentages safely
         copied_pct = (stats['copied'] / stats['total']) * 100
         conflicts_pct = (stats['conflicts'] / stats['total']) * 100
         unsorted_pct = (stats['unsorted'] / stats['total']) * 100
         
-        print(f"Total files found: {stats['total']}\n")
+        print(f"Total files processed: {stats['total']}\n")
         print(f"✅ Sorted:      {stats['copied']:>5} files ({copied_pct:.1f}%)")
         print(f"❓ Unsorted:    {stats['unsorted']:>5} files ({unsorted_pct:.1f}%)")
         print(f"⚠️ Conflicts:   {stats['conflicts']:>5} files ({conflicts_pct:.1f}%)")
