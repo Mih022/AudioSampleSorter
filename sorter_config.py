@@ -200,6 +200,13 @@ SORTING_RULES = [
         'extensions': ['.wav', '.mp3', '.aif'],
         'keywords': ['gong']
     },
+    {
+        'priority': 103,
+        'destination': 'Samples/Drums/Cowbells',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['cowbell']
+    },
+
 
     {
         'priority': 100,
@@ -312,12 +319,47 @@ SORTING_RULES = [
         'keywords': ['foley']
     },
     {
-        'priority': 80,
-        'destination': 'Samples/Drums/Loops/Percussion Loops',
+        'priority': 20,
+        'destination': 'Samples/Drums/Percussion/Misc',
         'extensions': ['.wav', '.mp3', '.aif'],
-        'keywords': ['perc', 'loop']
+        'keywords': ['agogo']
     },
-
+    {
+        'priority': 20,
+        'destination': 'Samples/Drums/Percussion/Misc',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['bodhrab']
+    },
+    {
+        'priority': 20,
+        'destination': 'Samples/Drums/Percussion/Misc',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['bongo']
+    },
+    {
+        'priority': 20,
+        'destination': 'Samples/Drums/Percussion/Misc',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['claves']
+    },
+    {
+        'priority': 20,
+        'destination': 'Samples/Drums/Percussion/Misc',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['shekere']
+    },
+    {
+        'priority': 20,
+        'destination': 'Samples/Drums/Percussion/Misc',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['djembe']
+    },
+    {
+        'priority': 20,
+        'destination': 'Samples/Drums/Percussion/Misc',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['timbal']
+    },
     {
         'priority': 20,
         'destination': 'Samples/Drums/Percussion/Other',
@@ -344,6 +386,12 @@ SORTING_RULES = [
         'destination': 'Samples/Drums/Loops/Percussion Loops',
         'extensions': ['.wav', '.mp3', '.aif'],
         'keywords': ['loop', 'percussion']
+    },
+    {
+        'priority': 80,
+        'destination': 'Samples/Drums/Loops/Percussion Loops',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['perc', 'loop']
     },
     {
         'priority': 100,
@@ -1017,6 +1065,12 @@ SORTING_RULES = [
         'keywords': ['flute']
     },
     {
+        'priority': 7,
+        'destination': 'Samples/Instruments/Rhodes',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['rhodes']
+    },
+    {
         'priority': 51,
         'destination': 'Samples/Instruments/Pads',
         'extensions': ['.wav', '.mp3', '.aif'],
@@ -1159,6 +1213,12 @@ SORTING_RULES = [
         'destination': 'Samples/Synths/Chords',
         'extensions': ['.wav', '.mp3', '.aif'],
         'keywords': ['chords']
+    },
+    {
+        'priority': 20,
+        'destination': 'Samples/Synths/Chords',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['chord']
     },
     {
         'priority': 20,
