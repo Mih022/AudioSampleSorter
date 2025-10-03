@@ -376,7 +376,7 @@ SORTING_RULES = [
 
     # -- DRUM LOOPS --
     {
-        'priority': 100,
+        'priority': 80,
         'destination': 'Samples/Drums/Loops/Top Loops',
         'extensions': ['.wav', '.mp3', '.aif'],
         'keywords': ['loop', 'top']
@@ -418,7 +418,7 @@ SORTING_RULES = [
         'keywords': ['loop', 'clap']
     },
     {
-        'priority': 100,
+        'priority': 101,
         'destination': 'Samples/Drums/Loops/Hat Loops',
         'extensions': ['.wav', '.mp3', '.aif'],
         'keywords': ['loop', 'hat']
@@ -436,8 +436,8 @@ SORTING_RULES = [
         'keywords': ['loop', 'stadium']
     },
     {
-        'priority': 5,
-        'destination': 'Samples/Drums/Loops',
+        'priority': 20,
+        'destination': 'Samples/Drums/Loops/Full Drum Loops',
         'extensions': ['.wav', '.mp3', '.aif'],
         'keywords': ['loop', 'drum']
     },
@@ -578,13 +578,13 @@ SORTING_RULES = [
         'keywords': ['ambiance', 'pretty']
     },
     {
-        'priority': 40,
+        'priority': 70,
         'destination': 'Samples/FX/Ambiance/Rain',
         'extensions': ['.wav', '.mp3', '.aif'],
         'keywords': ['rain']
     },
     {
-        'priority': 40,
+        'priority': 70,
         'destination': 'Samples/FX/Ambiance/Rain',
         'extensions': ['.wav', '.mp3', '.aif'],
         'keywords': ['thunder']
@@ -662,13 +662,13 @@ SORTING_RULES = [
         'keywords': ['amb', 'natural']
     },
     {
-        'priority': 10,
+        'priority': 11,
         'destination': 'Samples/FX/Ambiance/Other',
         'extensions': ['.wav', '.mp3', '.aif'],
         'keywords': ['amb']
     },
     {
-        'priority': 10,
+        'priority': 22,
         'destination': 'Samples/FX/Ambiance/Other',
         'extensions': ['.wav', '.mp3', '.aif'],
         'keywords': ['Cymatics - LIFE']
@@ -759,7 +759,7 @@ SORTING_RULES = [
         'keywords': ['gun']
     },
     {
-        'priority': 40,
+        'priority': 45,
         'destination': 'Samples/FX/Tonal',
         'extensions': ['.wav', '.mp3', '.aif'],
         'keywords': ['fx', 'tonal']
@@ -831,6 +831,12 @@ SORTING_RULES = [
         'destination': 'Samples/FX/White Noise/Up',
         'extensions': ['.wav', '.mp3', '.aif'],
         'keywords': ['white', 'noise', 'up']
+    },
+    {
+        'priority': 95,
+        'destination': 'Samples/FX/White Noise/Up',
+        'extensions': ['.wav', '.mp3', '.aif'],
+        'keywords': ['white', 'noise', 'riser']
     },
     {
         'priority': 100,
@@ -1028,7 +1034,7 @@ SORTING_RULES = [
         'keywords': ['piano', 'chords']
     },
     {
-        'priority': 50,
+        'priority': 52,
         'destination': 'Samples/Instruments/Piano/Other',
         'extensions': ['.wav', '.mp3', '.aif'],
         'keywords': ['piano']
@@ -1233,7 +1239,7 @@ SORTING_RULES = [
         'keywords': ['bass', 'shot']
     },
     {
-        'priority': 80,
+        'priority': 35,
         'destination': 'Samples/Synths/Bass/Loops',
         'extensions': ['.wav', '.mp3', '.aif'],
         'keywords': ['bass', 'loop']
@@ -1251,13 +1257,13 @@ SORTING_RULES = [
         'keywords': ['sub', 'bass']
     },
     {
-        'priority': 10,
+        'priority': 5,
         'destination': 'Samples/Synths/Bass/Sub',
         'extensions': ['.wav', '.mp3', '.aif'],
         'keywords': ['sub']
     },
     {
-        'priority': 15,
+        'priority': 19,
         'destination': 'Samples/Synths/Bass/Other',
         'extensions': ['.wav', '.mp3', '.aif'],
         'keywords': ['bass']
@@ -1492,67 +1498,67 @@ SORTING_RULES = [
         'keywords': ['']
     },
     {
-        'priority': 200,
+        'priority': 210,
         'destination': 'Trash/underscores',
         'extensions': [''],
         'keywords': ['._']
     },
     {
-        'priority': 200,
+        'priority': 190,
         'destination': 'Trash/asd',
         'extensions': ['.asd'],
         'keywords': ['']
     },
     {
-        'priority': 200,
+        'priority': 191,
         'destination': 'Trash/ptx',
         'extensions': ['.ptx'],
         'keywords': ['']
     },
     {
-        'priority': 200,
+        'priority': 192,
         'destination': 'Trash/zpw',
         'extensions': ['.zpw'],
         'keywords': ['']
     },
     {
-        'priority': 200,
+        'priority': 193,
         'destination': 'Trash/mp4',
         'extensions': ['.mp4'],
         'keywords': ['']
     },
     {
-        'priority': 200,
+        'priority': 194,
         'destination': 'Trash/fst',
         'extensions': ['.fst'],
         'keywords': ['']
     },
     {
-        'priority': 200,
+        'priority': 195,
         'destination': 'Trash/fsc',
         'extensions': ['.fsc'],
         'keywords': ['']
     },
     {
-        'priority': 200,
+        'priority': 196,
         'destination': 'Trash/m4a',
         'extensions': ['.m4a'],
         'keywords': ['']
     },
     {
-        'priority': 200,
+        'priority': 197,
         'destination': 'Trash/spf',
         'extensions': ['.spf'],
         'keywords': ['']
     },
     {
-        'priority': 200,
+        'priority': 198,
         'destination': 'Trash/pdf',
         'extensions': ['.pdf'],
         'keywords': ['']
     },
     {
-        'priority': 200,
+        'priority': 199,
         'destination': 'Trash/zips',
         'extensions': ['.zip'],
         'keywords': ['']
@@ -1565,7 +1571,7 @@ SORTING_RULES = [
     },
     #these are generally not good, check a bit anyway
     {
-        'priority': 15,
+        'priority': 200,
         'destination': 'Trash/REV-PSP',
         'extensions': ['.wav', '.mp3'],
         'keywords': ['REV-PSP']
