@@ -7,7 +7,7 @@ from sorter_config import SOURCE_FOLDER, TARGET_FOLDER, IGNORED_PATHS, MAX_DEPTH
 #SET LOGGING OPTIONS
 #Set to True to save the console output to a text file in the TARGET_FOLDER.
 LOG_FILENAME = "sorting_log.txt"
-LOG_MODE = 'conflicts_only' # Options: 'off', 'all', 'conflicts_only'
+LOG_MODE = 'conflicts_only' # Options: 'off', 'all', 'conflicts_only', 'duplicates_only'
 
 class Logger:
     """
@@ -20,6 +20,7 @@ class Logger:
         self.mode = mode
         # This is the specific string the logger looks for to identify a conflict message.
         self.conflict_identifier = "⚠️ Conflict:"
+        self.duplicate_identifier = "🚫 Duplicate:"
 
     def write(self, message):
         # Always write every message to the console terminal.
@@ -31,7 +32,10 @@ class Logger:
         elif self.mode == 'conflicts_only':
             # NOTE: This logic is tied to the format of the conflict print statement.
             if message.strip().startswith(self.conflict_identifier):
-                self.logfile.write(message)
+                self.logfile.write(message+'\n')
+        elif self.mode == 'duplicates_only':
+            if message.strip().startswith(self.duplicate_identifier):
+                self.logfile.write(message+'\n')
 
     def flush(self):
         self.terminal.flush()
@@ -151,12 +155,14 @@ def sort_files():
         print(f"Your original files in '{SOURCE_FOLDER}' are untouched.")
         
         print("\n" + "="*20 + " 📊 Sorting Summary " + "="*20)
-        if stats['total'] == 0:
+        total = stats['total'] - stats['duplicates']
+        if total == 0:
             print("No files were found to process (or all were in ignored paths).")
         else:
-            copied_pct = (stats['copied'] / stats['total']) * 100
-            conflicts_pct = (stats['conflicts'] / stats['total']) * 100
-            unsorted_pct = (stats['unsorted'] / stats['total']) * 100
+            
+            copied_pct = (stats['copied'] / total) * 100
+            conflicts_pct = (stats['conflicts'] / total) * 100
+            unsorted_pct = (stats['unsorted'] / total) * 100
             
             print(f"Total files processed: {stats['total']}\n")
             print(f"✅ Sorted:      {stats['copied']:>5} files ({copied_pct:.1f}%)")
