@@ -9,8 +9,8 @@ import shutil
 
 #SOURCE_FOLDER = "C:\\Users\\mladi\\Documents\\Splice"
 
-SOURCE_FOLDER = "D:\\mladi\\Documents\\FL relief"
-TARGET_FOLDER = "D:\\mladi\\Documents\\FL relief sorted"
+SOURCE_FOLDER = "D:\\mladi\\Documents\\FL relief MAC OLD"
+TARGET_FOLDER = "E:\\FL relief"
 
 # SOURCE_FOLDER = "D:\\mladi\\Documents\\FL relief sorted\\Unsorted"
 # TARGET_FOLDER = "D:\\mladi\\Documents\\FL relief sorted\\SORTED UNSORTED"
@@ -27,13 +27,16 @@ IGNORED_PATHS = [
     ".DS_Store", # macOS system files
     "1 GOTOVO",
     "Sounds of KSHMR",
+    "Samples\\Sounds of KSHMR",
     "A kapele",
     "FLP remakeovi",
     "MIHO Graphics",
     "Projekti",
+    "Plugins",
     "Reference Tracks",
     "Stemovi",
     "Video",
+    "Znanje",
     "Zipovi"
 ]
 
@@ -44,29 +47,133 @@ IGNORED_PATHS = [
 #    - 'keywords': A list of words that MUST ALL be in the filename.
 SORTING_RULES = [
     # -- PRESETS --
-    {
-        'priority': 100,
-        'destination': 'Presets/Serum',
-        'extensions': ['.fxp'],
-        'keywords': ['serum']
-    },
 
     {
-        'priority': 10,
-        'destination': 'Presets/Sylenth1',
-        'extensions': ['.fxp'],
-        'keywords': []
-    },
-    {
-        'priority': 10,
-        'destination': 'Presets/Sylenth1/banks',
+        'priority': 300,
+        'destination': 'Presets/Sylenth1/Banks',
         'extensions': ['.fxb'],
         'keywords': []
     },
     {
+        'priority': 300,
+        'destination': 'Presets/Sylenth1/Leads',
+        'extensions': ['.fxp'],
+        'keywords': ['lead']
+    },
+    {
+        'priority': 299,
+        'destination': 'Presets/Sylenth1/Leads',
+        'extensions': ['.fxp'],
+        'keywords': ['ld']
+    },
+    {
+        'priority': 300,
+        'destination': 'Presets/Sylenth1/Leads',
+        'extensions': ['.fxp'],
+        'keywords': ['bas']
+    },
+    {
+        'priority': 299,
+        'destination': 'Presets/Sylenth1/Leads',
+        'extensions': ['.fxp'],
+        'keywords': ['bs']
+    },
+    {
+        'priority': 300,
+        'destination': 'Presets/Sylenth1/Keys',
+        'extensions': ['.fxp'],
+        'keywords': ['key']
+    },
+    {
+        'priority': 300,
+        'destination': 'Presets/Sylenth1/Pads',
+        'extensions': ['.fxp'],
+        'keywords': ['pad']
+    },
+    {
+        'priority': 290,
+        'destination': 'Presets/Sylenth1/Plucks',
+        'extensions': ['.fxp'],
+        'keywords': ['pl']
+    },
+    {
+        'priority': 290,
+        'destination': 'Presets/Sylenth1/FX',
+        'extensions': ['.fxp'],
+        'keywords': ['fx']
+    },
+    {
+        'priority': 250,
+        'destination': 'Presets/Sylenth1/Other',
+        'extensions': ['.fxp'],
+        'keywords': []
+    },
+
+    {
+        'priority': 300,
+        'destination': 'Presets/Serum2/Leads',
+        'extensions': ['.serumpreset'],
+        'keywords': ['lead']
+    },
+    {
+        'priority': 299,
+        'destination': 'Presets/Serum2/Leads',
+        'extensions': ['.serumpreset'],
+        'keywords': ['ld']
+    },
+    {
+        'priority': 300,
+        'destination': 'Presets/Serum2/Leads',
+        'extensions': ['.serumpreset'],
+        'keywords': ['bas']
+    },
+    {
+        'priority': 299,
+        'destination': 'Presets/Serum2/Leads',
+        'extensions': ['.serumpreset'],
+        'keywords': ['bs']
+    },
+    {
+        'priority': 300,
+        'destination': 'Presets/Serum2/Keys',
+        'extensions': ['.serumpreset'],
+        'keywords': ['key']
+    },
+    {
+        'priority': 300,
+        'destination': 'Presets/Serum2/Pads',
+        'extensions': ['.serumpreset'],
+        'keywords': ['pad']
+    },
+    {
+        'priority': 290,
+        'destination': 'Presets/Serum2/Plucks',
+        'extensions': ['.serumpreset'],
+        'keywords': ['pl']
+    },
+    {
+        'priority': 290,
+        'destination': 'Presets/Serum2/FX',
+        'extensions': ['.serumpreset'],
+        'keywords': ['fx']
+    },
+    {
+        'priority': 250,
+        'destination': 'Presets/Serum2/Other',
+        'extensions': ['.serumpreset'],
+        'keywords': []
+    },
+
+    {
         'priority': 100,
         'destination': 'Presets/Massive',
         'extensions': ['.nmsv'],
+        'keywords': []
+    },
+    {
+        'priority': 200,
+        'destination': 'Presets/Spire',
+        'extensions': ['.spf'],
         'keywords': []
     },
 
@@ -1543,12 +1650,6 @@ SORTING_RULES = [
         'priority': 196,
         'destination': 'Trash/m4a',
         'extensions': ['.m4a'],
-        'keywords': ['']
-    },
-    {
-        'priority': 197,
-        'destination': 'Trash/spf',
-        'extensions': ['.spf'],
         'keywords': ['']
     },
     {
